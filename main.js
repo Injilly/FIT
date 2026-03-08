@@ -1,5 +1,4 @@
 // ================= MOTIVATION =================
-
 const motivations = [
   "Push yourself because no one else will do it for you.",
   "Consistency builds results.",
@@ -16,7 +15,6 @@ function motivation() {
 }
 
 // ================= BMI CALCULATOR =================
-
 function calculateBMI() {
   const weight = document.getElementById("weight").value;
   const height = document.getElementById("height").value / 100;
@@ -31,7 +29,6 @@ function calculateBMI() {
 }
 
 // ================= WORKOUT CALENDAR =================
-
 function addWorkout() {
   const date = document.getElementById("workoutDate").value;
   const type = document.getElementById("workoutType").value;
@@ -45,52 +42,58 @@ function addWorkout() {
   const li = document.createElement("li");
   li.textContent = date + " - " + type;
   list.appendChild(li);
+
+  // Save progress to localStorage
+  let progress = JSON.parse(localStorage.getItem("workoutProgress")) || {};
+  progress[date] = type === "Workout" ? 1 : 0;
+  localStorage.setItem("workoutProgress", JSON.stringify(progress));
+
+  updateProgressChart();
 }
 
 // ================= WORKOUT SUGGESTION BY BODY PART =================
-
 const workoutData = {
   chest: [
-    "Push Ups - 3 sets x 15 reps",
-    "Bench Press - 4 sets x 10 reps",
-    "Incline Dumbbell Press - 3 sets x 12 reps",
-    "Chest Fly - 3 sets x 12 reps"
+    "Push Ups - 3x15",
+    "Bench Press - 4x10",
+    "Incline Dumbbell Press - 3x12",
+    "Chest Fly - 3x12"
   ],
   arms: [
-    "Bicep Curls - 3 sets x 12 reps",
-    "Tricep Dips - 3 sets x 10 reps",
-    "Hammer Curls - 3 sets x 12 reps",
-    "Close Grip Push Ups - 3 sets x 12 reps"
+    "Bicep Curls - 3x12",
+    "Tricep Dips - 3x10",
+    "Hammer Curls - 3x12",
+    "Close Grip Push Ups - 3x12"
   ],
   legs: [
-    "Squats - 4 sets x 12 reps",
-    "Lunges - 3 sets x 10 reps",
-    "Leg Press - 3 sets x 12 reps",
-    "Calf Raises - 4 sets x 15 reps"
+    "Squats - 4x12",
+    "Lunges - 3x10",
+    "Leg Press - 3x12",
+    "Calf Raises - 4x15"
   ],
   abs: [
-    "Crunches - 3 sets x 20 reps",
-    "Plank - 3 sets x 40 seconds",
-    "Leg Raises - 3 sets x 15 reps",
-    "Russian Twists - 3 sets x 20 reps"
+    "Crunches - 3x20",
+    "Plank - 3x40s",
+    "Leg Raises - 3x15",
+    "Russian Twists - 3x20"
   ],
   shoulders: [
-    "Shoulder Press - 3 sets x 12 reps",
-    "Lateral Raises - 3 sets x 12 reps",
-    "Front Raises - 3 sets x 12 reps",
-    "Arnold Press - 3 sets x 10 reps"
+    "Shoulder Press - 3x12",
+    "Lateral Raises - 3x12",
+    "Front Raises - 3x12",
+    "Arnold Press - 3x10"
   ],
   back: [
-    "Pull Ups - 3 sets x 8 reps",
-    "Deadlifts - 4 sets x 6 reps",
-    "Lat Pulldown - 3 sets x 12 reps",
-    "Seated Row - 3 sets x 12 reps"
+    "Pull Ups - 3x8",
+    "Deadlifts - 4x6",
+    "Lat Pulldown - 3x12",
+    "Seated Row - 3x12"
   ],
   full: [
-    "Burpees - 3 sets x 10 reps",
-    "Jump Squats - 3 sets x 12 reps",
-    "Mountain Climbers - 3 sets x 30 sec",
-    "Push Ups - 3 sets x 15 reps"
+    "Burpees - 3x10",
+    "Jump Squats - 3x12",
+    "Mountain Climbers - 3x30s",
+    "Push Ups - 3x15"
   ]
 };
 
@@ -109,7 +112,6 @@ function generateWorkout() {
 }
 
 // ================= COACHBOT =================
-
 function sendMessage() {
   const input = document.getElementById("userInput");
   const chat = document.getElementById("chat");
@@ -119,7 +121,6 @@ function sendMessage() {
 
   chat.innerHTML += "<p><b>You:</b> " + user + "</p>";
 
-  // Simple responses (can be expanded)
   const responses = [
     "Keep training and stay consistent!",
     "Remember to stretch before workouts.",
@@ -129,7 +130,6 @@ function sendMessage() {
   ];
 
   const reply = responses[Math.floor(Math.random() * responses.length)];
-
   chat.innerHTML += "<p><b>CoachBot:</b> " + reply + "</p>";
   chat.scrollTop = chat.scrollHeight;
 
@@ -185,4 +185,14 @@ window.onload = function() {
   updateProgressChart();
 
   // Load existing calendar into page
-  const progress = JSON.parse(localStorage.getIte
+  const progress = JSON.parse(localStorage.getItem("workoutProgress")) || {};
+  const list = document.getElementById("calendarList");
+  if (list) {
+    list.innerHTML = "";
+    Object.keys(progress).sort().forEach(date => {
+      const li = document.createElement("li");
+      li.textContent = date + " - " + (progress[date] === 1 ? "Workout" : "Rest");
+      list.appendChild(li);
+    });
+  }
+};
