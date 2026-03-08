@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workout Planner</title>
+
+<title>Workout Planner | Fitness Interactive Tracker</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
+
+<!-- BUBBLE BACKGROUND -->
+
+<div class="bubbles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<!-- NAVIGATION -->
 
 <nav>
 <a href="index.html">Home</a>
@@ -20,6 +35,8 @@
 
 <h1>Workout Planner</h1>
 
+<!-- WORKOUT CALENDAR -->
+
 <div class="card">
 
 <h2>Workout Calendar</h2>
@@ -27,8 +44,8 @@
 <input type="date" id="workoutDate">
 
 <select id="workoutType">
-<option>Workout</option>
-<option>Rest</option>
+<option value="Workout">Workout</option>
+<option value="Rest">Rest</option>
 </select>
 
 <button onclick="addWorkout()">Add Schedule</button>
@@ -36,6 +53,8 @@
 <ul id="calendarList"></ul>
 
 </div>
+
+<!-- BMI CALCULATOR -->
 
 <div class="card">
 
@@ -50,21 +69,33 @@
 
 </div>
 
+<!-- WORKOUT SUGGESTION -->
+
 <div class="card">
 
 <h2>Workout Suggestion</h2>
 
+<p>Select a body part</p>
+
+<select id="bodyPart">
+
+<option value="">Select Body Part</option>
+
+<option value="chest">Chest</option>
+<option value="arms">Arms</option>
+<option value="legs">Legs</option>
+<option value="abs">Abs</option>
+<option value="shoulders">Shoulders</option>
+<option value="back">Back</option>
+<option value="full">Full Body</option>
+
+</select>
+
+<br><br>
+
 <button onclick="generateWorkout()">Generate Workout</button>
 
 <p id="suggestWorkout"></p>
-
-</div>
-
-<div class="card">
-
-<h2>100 Workout List</h2>
-
-<ul id="workoutList"></ul>
 
 </div>
 
