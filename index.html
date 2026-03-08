@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Interactive Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="bubbles">
+<span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="workout.html">Workout</a>
+<a href="coachbot.html">CoachBot</a>
+<a href="about.html">About</a>
+</nav>
+
+<h1>Fitness Interactive Tracker</h1>
+
+<div class="card">
+
+<h2>Welcome</h2>
+
+<p>
+Track workouts, calculate BMI, plan schedules, and stay motivated.
+</p>
+
+<button onclick="motivation()">Get Motivation</button>
+
+<p id="motivationText"></p>
+
+</div>
+
+<div class="card">
+
+<h2>Progress Chart</h2>
+
+<canvas id="progressChart"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
