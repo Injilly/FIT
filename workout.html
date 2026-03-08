@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout Planner</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="workout.html">Workout</a>
+<a href="coachbot.html">CoachBot</a>
+<a href="about.html">About</a>
+</nav>
+
+<h1>Workout Planner</h1>
+
+<div class="card">
+
+<h2>Workout Calendar</h2>
+
+<input type="date" id="workoutDate">
+
+<select id="workoutType">
+<option>Workout</option>
+<option>Rest</option>
+</select>
+
+<button onclick="addWorkout()">Add Schedule</button>
+
+<ul id="calendarList"></ul>
+
+</div>
+
+<div class="card">
+
+<h2>BMI Calculator</h2>
+
+<input type="number" id="weight" placeholder="Weight (kg)">
+<input type="number" id="height" placeholder="Height (cm)">
+
+<button onclick="calculateBMI()">Calculate BMI</button>
+
+<p id="bmiResult"></p>
+
+</div>
+
+<div class="card">
+
+<h2>Workout Suggestion</h2>
+
+<button onclick="generateWorkout()">Generate Workout</button>
+
+<p id="suggestWorkout"></p>
+
+</div>
+
+<div class="card">
+
+<h2>100 Workout List</h2>
+
+<ul id="workoutList"></ul>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
