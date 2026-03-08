@@ -136,32 +136,53 @@ function sendMessage() {
   input.value = "";
 }
 
-// ================= CHART.JS EXAMPLE (Optional) =================
-// Only works if you included <canvas id="progressChart"></canvas> in your HTML
-if (document.getElementById("progressChart")) {
+// ================= PROGRESS CHART =================
+let progressChart;
+
+function updateProgressChart() {
   const ctx = document.getElementById("progressChart").getContext("2d");
-  const progressChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-      datasets: [{
-        label: "Workout Progress",
-        data: [1, 2, 3, 4],
-        borderColor: "#ff3fa4",
-        backgroundColor: "rgba(255,105,180,0.3)",
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { labels: { color: "white" } }
+
+  const progress = JSON.parse(localStorage.getItem("workoutProgress")) || {};
+
+  // Sort dates
+  const labels = Object.keys(progress).sort();
+  const data = labels.map(date => progress[date]);
+
+  if (progressChart) {
+    progressChart.data.labels = labels;
+    progressChart.data.datasets[0].data = data;
+    progressChart.update();
+  } else {
+    progressChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "Workout Progress",
+          data: data,
+          borderColor: "#ff3fa4",
+          backgroundColor: "rgba(255,105,180,0.3)",
+          fill: true,
+          tension: 0.4
+        }]
       },
-      scales: {
-        x: { ticks: { color: "white" } },
-        y: { ticks: { color: "white" } }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: "white" } }
+        },
+        scales: {
+          x: { ticks: { color: "white" } },
+          y: { ticks: { color: "white", stepSize: 1 } }
+        }
       }
-    }
-  });
+    });
+  }
 }
+
+// Initialize chart on page load
+window.onload = function() {
+  updateProgressChart();
+
+  // Load existing calendar into page
+  const progress = JSON.parse(localStorage.getIte
